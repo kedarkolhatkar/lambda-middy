@@ -1,20 +1,39 @@
 {
   "name": "node-starter",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "A starter project for node",
+  "main": "src/lambda.js",
+  "author": "Kedar Kolhatkar",
+  "license": "MIT",
   "bin": {
     "node-starter": "bin/node-starter.js"
   },
   "scripts": {
-    "build": "echo \"The build step is not required when using JavaScript!\" && exit 0",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "bundle-lambda": "webpack --mode=production",
+    "start": "node ./build/stack-event-processor.js",
     "cdk": "cdk",
     "test": "jest"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.73.0",
+    "@aws-cdk/aws-lambda": "^1.78.0",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
     "aws-cdk": "1.73.0",
-    "jest": "^26.4.2"
+    "babel-loader": "^8.2.2",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^8.1.0",
+    "typescript": "~3.9.7",
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.73.0"
+    "@aws-cdk/core": "1.73.0",
+    "source-map-support": "^0.5.16"
   }
 }
