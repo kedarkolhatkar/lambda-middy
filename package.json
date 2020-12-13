@@ -12,7 +12,6 @@
     "build": "tsc",
     "watch": "tsc -w",
     "bundle-lambda": "webpack --mode=production",
-    "start": "node ./build/stack-event-processor.js",
     "cdk": "cdk",
     "test": "jest"
   },
