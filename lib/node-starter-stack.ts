@@ -17,6 +17,5 @@ export class NodeStarterStack extends cdk.Stack {
       handler: `${lambdaFunctionName}.handler`,
       code: lambda.Code.fromAsset(path.join(__dirname, lambdaFunctionSrcDir)),
     });
-
   }
 }

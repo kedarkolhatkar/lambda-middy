@@ -5,10 +5,7 @@ const OUT_DIR = path.resolve(__dirname, 'build');
 
 module.exports = {
   entry: {
-    'stack-event-processor': path.resolve(
-      SRC_DIR,
-      'function/stack-event-processor.js'
-    ),
+    'stack-event-processor': path.resolve(SRC_DIR, 'function/stack-event-processor.js'),
   },
   output: {
     path: `${OUT_DIR}`,
