@@ -10,6 +10,7 @@ export class NodeStarterStack extends cdk.Stack {
     const lambdaFunctionName = 'stack-event-processor';
     const lambdaFunctionSrcDir = `${srcDirectory}/${lambdaFunctionName}`;
     console.log(path.join(__dirname, lambdaFunctionSrcDir));
+    
     // The code that defines your stack goes here
     const fn = new lambda.Function(this, `${lambdaFunctionName}-id`, {
       functionName: lambdaFunctionName,

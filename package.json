@@ -15,8 +15,8 @@
     "bundle-development": "webpack --mode=development",
     "prettier:fix": "prettier --write '{src,bin,lib,test,pipeline,stage_vars,scripts,e2e}/**/*.{js,json,md,ts,yaml,yml}' './*.{js,json,md,ts,yml,yaml}'",
     "prettier": "prettier --check '{src,lib,test,pipeline,stage_vars,scripts}/**/*.{js,json,md,ts,yaml,yml}' './*.{js,json,md,ts,yml,yaml}'",
-    "lint": "./node_modules/.bin/eslint -c .eslintrc.json --ext=.ts,.js src/",
-    "lint:fix": "./node_modules/.bin/eslint -c .eslintrc.json --ext=.ts,.js src/ --quiet --fix",
+    "lint": "./node_modules/.bin/eslint -c .eslintrc.js --ext=.ts,.js src/ bin/ lib/",
+    "lint:fix": "./node_modules/.bin/eslint -c .eslintrc.js --ext=.ts,.js src/ bin/ lib/ --quiet --fix",
     "prepare-sam": "rm -rf ./cdk.out && cdk synth --no-staging && cp ./cdk.out/*NodeStarterStack*.json ./sam/template.json",
     "sam-event": "npm run bundle-development && sam local invoke -e ./sam/event.json -t ./sam/template.json",
     "cdk": "cdk",
@@ -24,12 +24,13 @@
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.73.0",
-    "@aws-cdk/aws-lambda": "^1.78.0",
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
     "aws-cdk": "1.73.0",
     "babel-loader": "^8.2.2",
     "eslint": "^7.2.0",
@@ -37,6 +38,7 @@
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-no-loops": "^0.3.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.0.0",
     "jest": "^26.4.2",
@@ -49,6 +51,7 @@
   },
   "dependencies": {
     "@aws-cdk/core": "1.73.0",
+    "@aws-cdk/aws-lambda": "^1.78.0",
     "source-map-support": "^0.5.16"
   }
 }
