@@ -1,6 +1,6 @@
 {
   "Resources": {
-    "stackeventprocessoridServiceRole17E6CCDF": {
+    "eventprocessoridServiceRole1C16318D": {
       "Type": "AWS::IAM::Role",
       "Properties": {
         "AssumeRolePolicyDocument": {
@@ -31,15 +31,15 @@
         ]
       },
       "Metadata": {
-        "aws:cdk:path": "NodeStarterStack/stack-event-processor-id/ServiceRole/Resource"
+        "aws:cdk:path": "NodeStarterStack/event-processor-id/ServiceRole/Resource"
       }
     },
-    "stackeventprocessoridCCE49B11": {
+    "eventprocessorid23419C8A": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
-            "Ref": "AssetParameters8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557cS3Bucket28F52FCD"
+            "Ref": "AssetParameters79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502S3Bucket56E70475"
           },
           "S3Key": {
             "Fn::Join": [
@@ -52,7 +52,7 @@
                       "Fn::Split": [
                         "||",
                         {
-                          "Ref": "AssetParameters8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557cS3VersionKey932AE41D"
+                          "Ref": "AssetParameters79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502S3VersionKey8D75AC2D"
                         }
                       ]
                     }
@@ -65,7 +65,7 @@
                       "Fn::Split": [
                         "||",
                         {
-                          "Ref": "AssetParameters8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557cS3VersionKey932AE41D"
+                          "Ref": "AssetParameters79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502S3VersionKey8D75AC2D"
                         }
                       ]
                     }
@@ -75,22 +75,22 @@
             ]
           }
         },
-        "Handler": "stack-event-processor.handler",
+        "Handler": "event-processor.handler",
         "Role": {
           "Fn::GetAtt": [
-            "stackeventprocessoridServiceRole17E6CCDF",
+            "eventprocessoridServiceRole1C16318D",
             "Arn"
           ]
         },
         "Runtime": "nodejs12.x",
-        "FunctionName": "stack-event-processor"
+        "FunctionName": "event-processor"
       },
       "DependsOn": [
-        "stackeventprocessoridServiceRole17E6CCDF"
+        "eventprocessoridServiceRole1C16318D"
       ],
       "Metadata": {
-        "aws:cdk:path": "NodeStarterStack/stack-event-processor-id/Resource",
-        "aws:asset:path": "/Users/kkolhatkar/sandbox/node-starter/build/stack-event-processor",
+        "aws:cdk:path": "NodeStarterStack/event-processor-id/Resource",
+        "aws:asset:path": "/Users/kkolhatkar/sandbox/middy-poc/build/event-processor",
         "aws:asset:property": "Code"
       }
     },
@@ -106,17 +106,17 @@
     }
   },
   "Parameters": {
-    "AssetParameters8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557cS3Bucket28F52FCD": {
+    "AssetParameters79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502S3Bucket56E70475": {
       "Type": "String",
-      "Description": "S3 bucket for asset \"8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557c\""
+      "Description": "S3 bucket for asset \"79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502\""
     },
-    "AssetParameters8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557cS3VersionKey932AE41D": {
+    "AssetParameters79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502S3VersionKey8D75AC2D": {
       "Type": "String",
-      "Description": "S3 key for asset version \"8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557c\""
+      "Description": "S3 key for asset version \"79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502\""
     },
-    "AssetParameters8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557cArtifactHash7403C2D7": {
+    "AssetParameters79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502ArtifactHash0358B8C6": {
       "Type": "String",
-      "Description": "Artifact hash for asset \"8583ade9f13ba266ee5c65479392cb4929826ea773dd314624256d3f81fc557c\""
+      "Description": "Artifact hash for asset \"79d1d906c65952dea8acf712c1c5263bbfb7a4e72da3f330c411e84ab5342502\""
     }
   },
   "Conditions": {
