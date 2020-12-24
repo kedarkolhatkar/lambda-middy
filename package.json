@@ -50,8 +50,9 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "@aws-cdk/core": "1.73.0",
     "@aws-cdk/aws-lambda": "^1.78.0",
+    "@aws-cdk/core": "1.73.0",
+    "@middy/core": "^1.5.0",
     "source-map-support": "^0.5.16"
   }
 }

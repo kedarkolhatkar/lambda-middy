@@ -4,6 +4,8 @@ const myMiddleware = (config) => {
     before: (handler, next) => {
       // might read options from `config`
       console.log('myMiddleware.before');
+      // Add config to context
+      console.log(`handler.context: ${JSON.stringify(handler.context)}`);
       next();
     },
     after: (handler, next) => {
