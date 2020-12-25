@@ -16,6 +16,7 @@ const myMiddleware = (config) => {
     onError: (handler, next) => {
       // might read options from `config`
       if (handler.error) {
+        console.log('myMiddleware.onError');
         console.error(handler.error);
       }
     },
