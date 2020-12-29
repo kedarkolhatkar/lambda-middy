@@ -1,6 +1,6 @@
 import middy from '@middy/core';
 import { myMiddleware } from './middleware/my-middleware';
-import logger from './middleware/logger';
+import { middleware as logMiddleware, logger } from './middleware/logger';
 
 async function waitFor() {
   logger.log('waitFor called');
@@ -8,17 +8,17 @@ async function waitFor() {
 }
 
 const originalHandler = async (event) => {
-  logger.log('Lambda function called');
+  logger.debug('Lambda function called');
   // console.log('Lambda function called');
-  logger.log(`event: ${JSON.stringify(event)}`);
+  logger.warn('event:', event);
   await waitFor();
   // nofunction(); // This will throw error
-  logger.log('executing after waitFor');
+  logger.error('executing after waitFor');
   return { success: 'true' };
 };
 
 const handler = middy(originalHandler);
 
-handler.use(logger.middleware({})).use(myMiddleware({}));
+handler.use(logMiddleware({})).use(myMiddleware({}));
 
 export { handler };

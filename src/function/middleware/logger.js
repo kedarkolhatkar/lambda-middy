@@ -1,5 +1,8 @@
 import { Logger } from './lambda-logger';
 
-const logger = Logger();
+function contextKeys(lambdaContext) {
+  // const region =
+  return { functionName: lambdaContext.functionName, functionArn: lambdaContext.invokedFunctionArn };
+}
 
-export default logger;
+export const { logger, middleware } = Logger({ getContextKeys: contextKeys });
