@@ -1,6 +1,7 @@
 import middy from '@middy/core';
 import { myMiddleware } from './middleware/my-middleware';
-import { middleware as logMiddleware, logger } from './middleware/logger';
+import { appSyncLambdaContextKeys } from './middleware/logger-utils';
+import { middleware, logger } from './middleware/logger';
 
 async function waitFor() {
   logger.log('waitFor called');
@@ -19,6 +20,6 @@ const originalHandler = async (event) => {
 
 const handler = middy(originalHandler);
 
-handler.use(logMiddleware({})).use(myMiddleware({}));
+handler.use(middleware(appSyncLambdaContextKeys)).use(myMiddleware({}));
 
 export { handler };

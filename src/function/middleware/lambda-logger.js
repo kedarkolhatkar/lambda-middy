@@ -1,3 +1,5 @@
+import { commonContextKeys } from './logger-utils';
+
 /* eslint-disable no-console */
 const SEVERETY = {
   DEBUG: 'DEBUG',
@@ -12,22 +14,25 @@ function getSetKey(logContext) {
   };
 }
 
-function setContextKeys(lambdaContext, logContext) {
+function setupContext(lambdaContext, logContext, getContextKeys) {
   // console.log(`setting context keys: lambdaContext=${JSON.stringify(lambdaContext)}`);
   if (!lambdaContext) {
     return;
   }
 
-  const { config } = logContext;
-  const { getContextKeys } = config;
+  let contextKeysFunc;
   if (getContextKeys && typeof getContextKeys === 'function') {
-    const logContextKeys = getContextKeys(lambdaContext);
-    console.log(`setcontextkeys keys=${JSON.stringify(logContextKeys)}`);
-
-    Object.entries(logContextKeys).forEach(([key, value]) => {
-      logContext.keys.set(key, value);
-    });
+    contextKeysFunc = getContextKeys;
+  } else {
+    contextKeysFunc = commonContextKeys;
   }
+
+  const logContextKeys = contextKeysFunc(lambdaContext);
+  console.log(`setcontextkeys keys=${JSON.stringify(logContextKeys)}`);
+
+  Object.entries(logContextKeys).forEach(([key, value]) => {
+    logContext.keys.set(key, value);
+  });
 
   // console.log(`logContext.keys before setting  ${JSON.stringify(logContext.keys)}`);
 
@@ -36,11 +41,11 @@ function setContextKeys(lambdaContext, logContext) {
 }
 
 function getMiddleware(logContext) {
-  return () => ({
+  return (getContextKeys) => ({
     before: (handler, next) => {
       // Add config to context
       console.log(`middleware.before handler: ${JSON.stringify(handler)} lambdaContext=${handler.context}`);
-      setContextKeys(handler.context, logContext);
+      setupContext(handler.context, logContext, getContextKeys);
       next();
     },
     after: (handler, next) => {
@@ -131,13 +136,12 @@ function createLogger(logContext) {
 /**
  *
  */
-function Logger(config = {}) {
+function Logger() {
   // console.log('in Logger');
 
   const logContext = {
     keys: new Map(),
     delimeter: '__LOG_OBJECT__',
-    config,
   };
 
   return {
